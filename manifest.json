@@ -1,0 +1,26 @@
+{
+  "name": "MigraTrack",
+  "short_name": "MigraTrack",
+  "description": "Registrá tus episodios de migraña y encontrá tus patrones",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0d0820",
+  "theme_color": "#0d0820",
+  "orientation": "portrait",
+  "lang": "es",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
