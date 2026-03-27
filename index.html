@@ -143,7 +143,7 @@
     .wizard-step-indicator { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; }
     .wizard-step-text { font-size: 12px; color: var(--text2); }
     .wizard-step-emoji { font-size: 18px; }
-    .wizard-body { padding: 28px 20px 12px; }
+    .wizard-body { padding: 28px 20px 120px; }
     .wizard-step-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
     .wizard-step-subtitle { font-size: 14px; color: var(--text2); margin-bottom: 32px; line-height: 1.75; }
     /* ── FORM COMPONENTS ── */
@@ -187,16 +187,20 @@
     .toggle-text { font-size: 16px; font-weight: 500; }
     .toggle-sub { font-size: 13px; color: var(--text2); margin-top: 3px; }
     .toggle {
-      position: relative; width: 56px; height: 32px; cursor: pointer; flex-shrink: 0;
+      position: relative; display: inline-block; width: 56px; height: 32px;
+      cursor: pointer; flex-shrink: 0; vertical-align: middle;
     }
-    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
     .toggle-slider {
-      position: absolute; inset: 0; background: var(--card2); border: 1.5px solid var(--border);
-      border-radius: 16px; transition: all .2s;
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: #374151; border: 1.5px solid #4b5563;
+      border-radius: 16px; transition: background .2s, border-color .2s;
     }
     .toggle-slider::after {
       content: ''; position: absolute; width: 24px; height: 24px;
-      left: 3px; top: 3px; background: var(--text3); border-radius: 50%; transition: all .2s;
+      left: 3px; top: 3px; background: #9ca3af; border-radius: 50%;
+      transition: transform .2s, background .2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,.5);
     }
     .toggle input:checked + .toggle-slider { background: var(--accent); border-color: var(--accent); }
     .toggle input:checked + .toggle-slider::after { transform: translateX(24px); background: #fff; }
@@ -223,9 +227,9 @@
     .textarea:focus { border-color: var(--accent); }
     /* Wizard nav buttons */
     .wizard-nav {
-      display: flex; gap: 10px; padding: 16px 20px;
-      position: sticky; bottom: 64px; background: var(--bg);
-      border-top: 1px solid var(--border);
+      display: flex; gap: 10px; padding: 16px 20px max(16px, env(safe-area-inset-bottom));
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+      background: var(--bg); border-top: 1px solid var(--border);
     }
     .wizard-nav .btn-back { flex: 0 0 auto; width: 56px; height: 58px; padding: 0; font-size: 20px; }
     .wizard-nav .btn-next { flex: 1; height: 58px; font-size: 17px; letter-spacing: .3px; }
@@ -379,40 +383,40 @@ function formatDate(str) {
 }
 
 function intensityColor(v) {
-  if (v < 20) return '#10b981';
-  if (v < 40) return '#34d399';
-  if (v < 60) return '#f59e0b';
-  if (v < 80) return '#f97316';
+  if (v < 2) return '#10b981';
+  if (v < 4) return '#34d399';
+  if (v < 6) return '#f59e0b';
+  if (v < 8) return '#f97316';
   return '#ef4444';
 }
 function intensityLabel(v) {
-  if (v < 15) return 'Sin dolor';
-  if (v < 30) return 'Leve';
-  if (v < 50) return 'Moderado';
-  if (v < 65) return 'Importante';
-  if (v < 80) return 'Fuerte';
-  if (v < 93) return 'Muy fuerte';
+  if (v < 1.5) return 'Sin dolor';
+  if (v < 3) return 'Leve';
+  if (v < 5) return 'Moderado';
+  if (v < 6.5) return 'Importante';
+  if (v < 8) return 'Fuerte';
+  if (v < 9.3) return 'Muy fuerte';
   return 'Insoportable';
 }
 function stressLabel(v) {
-  if (v < 20) return 'Zen 🧘';
-  if (v < 40) return 'Tranquila';
-  if (v < 60) return 'Moderado';
-  if (v < 80) return 'Alto';
+  if (v < 2) return 'Zen 🧘';
+  if (v < 4) return 'Tranquila';
+  if (v < 6) return 'Moderado';
+  if (v < 8) return 'Alto';
   return 'Al límite';
 }
 function sleepQLabel(v) {
-  if (v < 20) return 'Pésimo';
-  if (v < 40) return 'Malo';
-  if (v < 60) return 'Regular';
-  if (v < 80) return 'Bueno';
+  if (v < 2) return 'Pésimo';
+  if (v < 4) return 'Malo';
+  if (v < 6) return 'Regular';
+  if (v < 8) return 'Bueno';
   return 'Excelente';
 }
 function hydrationLabel(v) {
-  if (v < 20) return 'Muy poca (< 500ml)';
-  if (v < 40) return 'Poca (~ 700ml)';
-  if (v < 60) return 'Regular (~ 1L)';
-  if (v < 80) return 'Buena (~ 1.5L)';
+  if (v < 2) return 'Muy poca (< 500ml)';
+  if (v < 4) return 'Poca (~ 700ml)';
+  if (v < 6) return 'Regular (~ 1L)';
+  if (v < 8) return 'Buena (~ 1.5L)';
   return 'Excelente (2L+)';
 }
 
@@ -530,16 +534,16 @@ const WIZARD_STEPS = [
         </div>
         <div class="field-group">
           <label class="field-label">¿Qué tan intenso es el dolor ahora mismo?</label>
-          <p class="field-sublabel">Arrastrá el círculo. 0 = sin dolor, 100 = lo peor que imaginás.</p>
-          ${renderSlider('current_intensity', wizardData.current_intensity ?? 50, {
-            leftLabel:'Sin dolor', rightLabel:'Insoportable', scheme:'pain'
+          <p class="field-sublabel">Arrastrá el círculo. 0 = sin dolor, 10 = lo peor.</p>
+          ${renderSlider('current_intensity', wizardData.current_intensity ?? 5, {
+            max:10, leftLabel:'Sin dolor', rightLabel:'Insoportable', scheme:'pain'
           })}
         </div>
         <div class="field-group">
           <label class="field-label">¿Cuánto te está limitando?</label>
-          <p class="field-sublabel">0 = funciono normal / 100 = no puedo hacer absolutamente nada</p>
-          ${renderSlider('disability_level', wizardData.disability_level ?? 40, {
-            leftLabel:'Funciono normal', rightLabel:'No puedo nada', scheme:'pain'
+          <p class="field-sublabel">0 = funciono normal / 10 = no puedo hacer nada</p>
+          ${renderSlider('disability_level', wizardData.disability_level ?? 4, {
+            max:10, leftLabel:'Funciono normal', rightLabel:'No puedo nada', scheme:'pain'
           })}
         </div>
       `;
@@ -593,31 +597,31 @@ const WIZARD_STEPS = [
     id: 'sintomas',
     icon: '👁️',
     title: 'Síntomas asociados',
-    subtitle: 'Indicá cuánto te afecta cada uno. 0 = nada, 100 = máximo.',
+    subtitle: 'Indicá cuánto te afecta cada uno. 0 = nada, 10 = máximo.',
     render() {
       return `
         <div class="field-group">
           <label class="field-label">Sensibilidad a la luz (fotofobia)</label>
           ${renderSlider('photophobia', wizardData.photophobia ?? 0, {
-            leftLabel:'No molesta', rightLabel:'Insoportable', scheme:'warn'
+            max:10, leftLabel:'No molesta', rightLabel:'Insoportable', scheme:'warn'
           })}
         </div>
         <div class="field-group">
           <label class="field-label">Sensibilidad al sonido (fonofobia)</label>
           ${renderSlider('phonophobia', wizardData.phonophobia ?? 0, {
-            leftLabel:'No molesta', rightLabel:'Insoportable', scheme:'warn'
+            max:10, leftLabel:'No molesta', rightLabel:'Insoportable', scheme:'warn'
           })}
         </div>
         <div class="field-group">
           <label class="field-label">Náuseas</label>
           ${renderSlider('nausea', wizardData.nausea ?? 0, {
-            leftLabel:'Sin náuseas', rightLabel:'Con ganas de vomitar', scheme:'warn'
+            max:10, leftLabel:'Sin náuseas', rightLabel:'Con ganas de vomitar', scheme:'warn'
           })}
         </div>
         <div class="field-group">
           <label class="field-label">Sensibilidad a los olores (osmofobia)</label>
           ${renderSlider('osmophobia', wizardData.osmophobia ?? 0, {
-            leftLabel:'Normal', rightLabel:'Insoportable', scheme:'warn'
+            max:10, leftLabel:'Normal', rightLabel:'Insoportable', scheme:'warn'
           })}
         </div>
         <div class="field-group">
@@ -664,40 +668,58 @@ const WIZARD_STEPS = [
     id: 'ciclo',
     icon: '🌙',
     title: 'Ciclo menstrual',
-    subtitle: 'El ciclo hormonal es el factor más importante en las migrañas femeninas.',
+    subtitle: 'Esta sección es opcional. Si no tenés ciclo menstrual, elegí la opción correspondiente.',
     render() {
+      const hasCycle = wizardData.has_cycle !== false;
       return `
         <div class="field-group">
-          <label class="field-label">¿En qué fase estás hoy?</label>
-          ${renderChips('menstrual_phase', Object.values(PHASE_LABELS), false, wizardData.menstrual_phase ? [PHASE_LABELS[wizardData.menstrual_phase]] : [], 'pink')}
+          <label class="field-label">¿Tenés ciclo menstrual?</label>
+          ${renderChips('has_cycle', ['Sí, tengo ciclo', 'No tengo ciclo'], false,
+            hasCycle ? ['Sí, tengo ciclo'] : ['No tengo ciclo'])}
         </div>
-        <div class="field-group">
-          <label class="field-label">¿Cuántos días faltan para que baje la menstruación?</label>
-          <p class="field-sublabel">Si ya bajó, poné 0. Si no sabés, dejalo en blanco.</p>
-          <input type="number" id="f_days_until_period" class="num-input" min="0" max="35" placeholder="ej: 2" value="${wizardData.days_until_period !== undefined ? wizardData.days_until_period : ''}">
-        </div>
-        <div class="field-group">
-          <label class="field-label">¿Bajó la menstruación hoy?</label>
-          ${renderToggle('period_today', wizardData.period_today || false)}
-        </div>
-        <div class="field-group">
-          <label class="field-label">¿Con qué intensidad tenés síntomas premenstruales?</label>
-          <p class="field-sublabel">Hinchazón, irritabilidad, sensibilidad en mamas, cambios de humor, etc.</p>
-          ${renderSlider('pms_symptoms', wizardData.pms_symptoms ?? 0, {
-            leftLabel:'Ninguno', rightLabel:'Muy intensos', scheme:'warn'
-          })}
+        <div id="cycle-fields" style="display:${hasCycle ? 'block' : 'none'}">
+          <div class="field-group">
+            <label class="field-label">¿En qué fase estás hoy?</label>
+            ${renderChips('menstrual_phase', Object.values(PHASE_LABELS), false, wizardData.menstrual_phase ? [PHASE_LABELS[wizardData.menstrual_phase]] : [], 'pink')}
+          </div>
+          <div class="field-group">
+            <label class="field-label">¿Cuántos días faltan para que baje la menstruación?</label>
+            <p class="field-sublabel">Si ya bajó, poné 0. Si no sabés, dejalo en blanco.</p>
+            <input type="number" id="f_days_until_period" class="num-input" min="0" max="35" placeholder="ej: 2" value="${wizardData.days_until_period !== undefined ? wizardData.days_until_period : ''}">
+          </div>
+          <div class="field-group">
+            <label class="field-label">¿Bajó la menstruación hoy?</label>
+            ${renderToggle('period_today', wizardData.period_today || false)}
+          </div>
+          <div class="field-group">
+            <label class="field-label">¿Con qué intensidad tenés síntomas premenstruales?</label>
+            <p class="field-sublabel">Hinchazón, irritabilidad, sensibilidad en mamas, cambios de humor, etc.</p>
+            ${renderSlider('pms_symptoms', wizardData.pms_symptoms ?? 0, {
+              max:10, leftLabel:'Ninguno', rightLabel:'Muy intensos', scheme:'warn'
+            })}
+          </div>
         </div>
       `;
     },
     collect() {
+      const hasCycle = getChipVals('has_cycle')[0] !== 'No tengo ciclo';
+      wizardData.has_cycle = hasCycle;
+      if (!hasCycle) {
+        wizardData.menstrual_phase = null;
+        wizardData.days_until_period = null;
+        wizardData.period_today = false;
+        wizardData.pms_symptoms = null;
+        return;
+      }
       const phaseVals = getChipVals('menstrual_phase');
       if (phaseVals.length) {
         const key = Object.keys(PHASE_LABELS).find(k => PHASE_LABELS[k] === phaseVals[0]);
         wizardData.menstrual_phase = key || phaseVals[0];
       }
-      const dVal = document.getElementById('f_days_until_period').value;
-      wizardData.days_until_period = dVal !== '' ? parseInt(dVal) : null;
-      wizardData.period_today = document.getElementById('toggle_period_today').checked;
+      const dEl = document.getElementById('f_days_until_period');
+      wizardData.days_until_period = dEl && dEl.value !== '' ? parseInt(dEl.value) : null;
+      const pEl = document.getElementById('toggle_period_today');
+      wizardData.period_today = pEl ? pEl.checked : false;
       wizardData.pms_symptoms = getSliderVal('pms_symptoms');
     }
   },
@@ -734,8 +756,8 @@ const WIZARD_STEPS = [
         </div>
         <div class="field-group">
           <label class="field-label">¿Cómo valorarías la calidad general del sueño?</label>
-          ${renderSlider('sleep_quality', wizardData.sleep_quality ?? 60, {
-            leftLabel:'Pésimo', rightLabel:'Perfecto', scheme:'positive'
+          ${renderSlider('sleep_quality', wizardData.sleep_quality ?? 6, {
+            max:10, leftLabel:'Pésimo', rightLabel:'Perfecto', scheme:'positive'
           })}
         </div>
       `;
@@ -758,14 +780,14 @@ const WIZARD_STEPS = [
       return `
         <div class="field-group">
           <label class="field-label">¿Cuál fue tu nivel de estrés ayer?</label>
-          ${renderSlider('stress_yesterday', wizardData.stress_yesterday ?? 40, {
-            leftLabel:'Zen 🧘', rightLabel:'Al límite 🔥', scheme:'warn'
+          ${renderSlider('stress_yesterday', wizardData.stress_yesterday ?? 4, {
+            max:10, leftLabel:'Zen 🧘', rightLabel:'Al límite 🔥', scheme:'warn'
           })}
         </div>
         <div class="field-group">
           <label class="field-label">¿Y hoy, antes del episodio?</label>
-          ${renderSlider('stress_today', wizardData.stress_today ?? 40, {
-            leftLabel:'Zen 🧘', rightLabel:'Al límite 🔥', scheme:'warn'
+          ${renderSlider('stress_today', wizardData.stress_today ?? 4, {
+            max:10, leftLabel:'Zen 🧘', rightLabel:'Al límite 🔥', scheme:'warn'
           })}
         </div>
         <div class="field-group">
@@ -796,8 +818,8 @@ const WIZARD_STEPS = [
         <div class="field-group">
           <label class="field-label">Hidratación de ayer</label>
           <p class="field-sublabel">¿Cuánta agua / líquidos tomaste ayer en total?</p>
-          ${renderSlider('hydration', wizardData.hydration ?? 50, {
-            leftLabel:'Casi nada', rightLabel:'2 litros +', scheme:'positive'
+          ${renderSlider('hydration', wizardData.hydration ?? 5, {
+            max:10, leftLabel:'Casi nada', rightLabel:'2 litros +', scheme:'positive'
           })}
         </div>
         <div class="field-group">
@@ -818,20 +840,29 @@ const WIZARD_STEPS = [
         </div>
         <div class="field-group">
           <label class="field-label">Calidad general de la alimentación ayer</label>
-          ${renderSlider('diet_quality', wizardData.diet_quality ?? 60, {
-            leftLabel:'Muy mala', rightLabel:'Excelente', scheme:'positive'
+          ${renderSlider('diet_quality', wizardData.diet_quality ?? 6, {
+            max:10, leftLabel:'Muy mala', rightLabel:'Excelente', scheme:'positive'
           })}
         </div>
         <div class="field-group">
-          <label class="field-label">¿Cuántas tazas/vasos con cafeína tomaste ayer?</label>
-          <p class="field-sublabel">Café, té, mate, energizante...</p>
-          ${renderSlider('caffeine_cups', wizardData.caffeine_cups ?? 2, {
+          <label class="field-label">¿Cuántas tazas de café o té tomaste ayer?</label>
+          <p class="field-sublabel">Café, té, energizante, gaseosa con cafeína.</p>
+          ${renderSlider('caffeine_cups', wizardData.caffeine_cups ?? 1, {
             min:0, max:8, step:1, formatter: v => v===0?'Ninguna':`${v} ${v===1?'taza':'tazas'}`,
             leftLabel:'Ninguna', rightLabel:'8+', scheme:'neutral'
           })}
         </div>
         <div class="field-group">
-          <label class="field-label">¿Tomaste menos cafeína de lo habitual?</label>
+          <label class="field-label">¿Tomaste mate ayer?</label>
+          <p class="field-sublabel">Contá cuántas rondas o porrones aproximadamente.</p>
+          ${renderSlider('mate_rounds', wizardData.mate_rounds ?? 0, {
+            min:0, max:5, step:1,
+            formatter: v => v===0?'No tomé':`${v} ${v===1?'porrón':'porrones'}`,
+            leftLabel:'No tomé', rightLabel:'5+', scheme:'neutral'
+          })}
+        </div>
+        <div class="field-group">
+          <label class="field-label">¿Tomaste menos cafeína/mate de lo habitual?</label>
           <p class="field-sublabel">La abstinencia de cafeína es un trigger claro y documentado.</p>
           ${renderToggle('caffeine_withdrawal', wizardData.caffeine_withdrawal || false)}
         </div>
@@ -844,6 +875,7 @@ const WIZARD_STEPS = [
       wizardData.foods_consumed = getChipVals('foods_consumed');
       wizardData.diet_quality = getSliderVal('diet_quality');
       wizardData.caffeine_cups = getSliderVal('caffeine_cups');
+      wizardData.mate_rounds = getSliderVal('mate_rounds');
       wizardData.caffeine_withdrawal = document.getElementById('toggle_caffeine_withdrawal').checked;
     }
   },
@@ -911,8 +943,8 @@ const WIZARD_STEPS = [
           </div>
           <div class="field-group">
             <label class="field-label">¿Qué tan intenso fue?</label>
-            ${renderSlider('exercise_intensity', wizardData.exercise_intensity ?? 40, {
-              leftLabel:'Muy suave', rightLabel:'Agotadora', scheme:'warn'
+            ${renderSlider('exercise_intensity', wizardData.exercise_intensity ?? 4, {
+              max:10, leftLabel:'Muy suave', rightLabel:'Agotadora', scheme:'warn'
             })}
           </div>
         </div>
@@ -939,7 +971,7 @@ const WIZARD_STEPS = [
               <div class="med-row-num">${i+1}</div>
               <div class="med-row-content">
                 <strong>${m.name}${m.dose ? ` (${m.dose})` : ''}</strong> — ${m.time || ''}
-                ${m.efficacy !== null ? `<br><span>Alivio: <span style="color:${intensityColor(100-m.efficacy)}">${m.efficacy}%</span></span>` : ''}
+                ${m.efficacy !== null ? `<br><span>Alivio: <span style="color:${intensityColor(10-m.efficacy)}">${m.efficacy}/10</span></span>` : ''}
               </div>
               <button onclick="removeMedFromWizard(${i})" style="background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:4px">×</button>
             </div>
@@ -962,7 +994,7 @@ const WIZARD_STEPS = [
         <div class="field-group">
           <label class="field-label text-sm">¿Cuánto alivio te dio? (dejalo en 0 si aún no sabés)</label>
           ${renderSlider('wiz_med_efficacy', 0, {
-            leftLabel:'Sin alivio', rightLabel:'Alivio total', scheme:'positive'
+            max:10, leftLabel:'Sin alivio', rightLabel:'Alivio total', scheme:'positive'
           })}
         </div>
         <button class="btn btn-secondary btn-sm mt-2" onclick="addMedToWizard()">+ Agregar este medicamento</button>
@@ -1003,13 +1035,13 @@ const WIZARD_STEPS = [
 function renderSlider(id, value, opts = {}) {
   const { min=0, max=100, step=1, leftLabel='', rightLabel='', scheme='neutral', formatter=null } = opts;
   const val = clamp(value, min, max);
-  const formatted = formatter ? formatter(val) : (scheme === 'pain' ? `${val} — ${intensityLabel(val)}` : scheme === 'positive' ? (id==='sleep_quality'?`${val}% — ${sleepQLabel(val)}`:`${val}%`) : scheme === 'warn' ? (id==='stress_yesterday'||id==='stress_today'?`${val}% — ${stressLabel(val)}`:`${val}%`) : id==='hydration' ? `${val}% — ${hydrationLabel(val)}` : `${val}`);
-  const color = scheme==='pain' ? intensityColor(val) : scheme==='positive' ? (val>60?'var(--green)':val>30?'var(--amber)':'var(--red)') : scheme==='warn' ? (val<30?'var(--green)':val<60?'var(--amber)':'var(--red)') : 'var(--accent2)';
+  const formatted = formatter ? formatter(val) : (scheme === 'pain' ? `${val}/10 — ${intensityLabel(val)}` : scheme === 'positive' ? (id==='sleep_quality'?`${val}/10 — ${sleepQLabel(val)}`:`${val}/10`) : scheme === 'warn' ? (id==='stress_yesterday'||id==='stress_today'?`${val}/10 — ${stressLabel(val)}`:`${val}/10`) : id==='hydration' ? `${val}/10 — ${hydrationLabel(val)}` : `${val}`);
+  const color = scheme==='pain' ? intensityColor(val) : scheme==='positive' ? (val>6?'var(--green)':val>3?'var(--amber)':'var(--red)') : scheme==='warn' ? (val<3?'var(--green)':val<6?'var(--amber)':'var(--red)') : 'var(--accent2)';
   return `
     <div class="slider-wrap">
       <div class="slider-value-badge" id="display_${id}" style="color:${color}">${formatted}</div>
       <input type="range" class="range-input" id="slider_${id}" min="${min}" max="${max}" step="${step}" value="${val}"
-        oninput="updateSlider('${id}','${scheme}',${min},${max},${JSON.stringify(formatter ? 'custom' : null)})">
+        oninput="updateSlider('${id}','${scheme}',${min},${max})">
       ${leftLabel||rightLabel ? `<div class="slider-end-labels"><span>${leftLabel}</span><span>${rightLabel}</span></div>` : ''}
     </div>`;
 }
@@ -1019,21 +1051,22 @@ function updateSlider(id, scheme, min, max, _fmt) {
   if (!input) return;
   const val = parseFloat(input.value);
   const pct = ((val-min)/(max-min))*100;
-  const color = scheme==='pain' ? intensityColor(val) : scheme==='positive' ? (val>60?'var(--green)':val>30?'var(--amber)':'var(--red)') : scheme==='warn' ? (val<30?'var(--green)':val<60?'var(--amber)':'var(--red)') : 'var(--accent2)';
+  const color = scheme==='pain' ? intensityColor(val) : scheme==='positive' ? (val>6?'var(--green)':val>3?'var(--amber)':'var(--red)') : scheme==='warn' ? (val<3?'var(--green)':val<6?'var(--amber)':'var(--red)') : 'var(--accent2)';
   input.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${pct}%, var(--card2) ${pct}%, var(--card2) 100%)`;
   const display = document.getElementById(`display_${id}`);
   if (!display) return;
   display.style.color = color;
-  if (scheme==='pain') display.textContent = `${val} — ${intensityLabel(val)}`;
-  else if (id==='sleep_quality') display.textContent = `${val}% — ${sleepQLabel(val)}`;
-  else if (id==='hydration') display.textContent = `${val}% — ${hydrationLabel(val)}`;
-  else if (id==='stress_yesterday'||id==='stress_today') display.textContent = `${val}% — ${stressLabel(val)}`;
+  if (scheme==='pain') display.textContent = `${val}/10 — ${intensityLabel(val)}`;
+  else if (id==='sleep_quality') display.textContent = `${val}/10 — ${sleepQLabel(val)}`;
+  else if (id==='hydration') display.textContent = `${val}/10 — ${hydrationLabel(val)}`;
+  else if (id==='stress_yesterday'||id==='stress_today') display.textContent = `${val}/10 — ${stressLabel(val)}`;
   else if (id==='sleep_hours') display.textContent = `${val} horas`;
   else if (id==='prodrome_hours') display.textContent = `${val}h antes`;
   else if (id==='fasting_hours') display.textContent = `${val}h de ayuno`;
   else if (id==='caffeine_cups') display.textContent = val===0?'Ninguna':`${val} ${val===1?'taza':'tazas'}`;
+  else if (id==='mate_rounds') display.textContent = val===0?'No tomé':`${val} ${val===1?'porrón':'porrones'}`;
   else if (id==='screen_time') display.textContent = `${val}h`;
-  else display.textContent = `${val}%`;
+  else display.textContent = `${val}/10`;
 }
 
 function initSliders() {
@@ -1077,6 +1110,11 @@ function onChipClick(event, id) {
     const hasVal = wrap.querySelectorAll('.chip.selected').length > 0;
     const grp = document.getElementById('prodrome-hours-group');
     if (grp) grp.style.display = hasVal ? 'block' : 'none';
+  }
+  if (id === 'has_cycle') {
+    const show = chip.dataset.val === 'Sí, tengo ciclo';
+    const el = document.getElementById('cycle-fields');
+    if (el) el.style.display = show ? 'block' : 'none';
   }
 }
 
@@ -1214,7 +1252,7 @@ function saveWizardEpisode() {
       id: 1,
       wave_start: wizardData.started_at || nowTimeStr(),
       wave_end: null,
-      peak_intensity: wizardData.current_intensity || 50,
+      peak_intensity: wizardData.current_intensity || 5,
       resolved: false,
       resolution_type: null,
       medications: wizardData.first_wave_meds || []
@@ -1247,7 +1285,7 @@ function openAddMedModal() {
     </div>
     <div class="field-group">
       <label class="field-label">¿Cuánto alivio te dio? (dejalo en 0 si aún no sabés)</label>
-      ${renderSlider('modal_med_eff', 0, {leftLabel:'Sin alivio', rightLabel:'Alivio total', scheme:'positive'})}
+      ${renderSlider('modal_med_eff', 0, {max:10, leftLabel:'Sin alivio', rightLabel:'Alivio total', scheme:'positive'})}
     </div>
     <button class="btn btn-primary mt-3" onclick="saveMedToActive()">Guardar</button>
   `;
@@ -1286,7 +1324,7 @@ function openCloseWaveModal() {
     </div>
     <div class="field-group">
       <label class="field-label">¿Cómo se resolvió?</label>
-      ${renderChips('modal_wave_res', ['Solo (espontáneo)','Con medicación','Dormí','Otro'], false, [])}
+      ${renderChips('modal_wave_res', ['Solo (espontáneo)','Con medicación','Dormí','Oscuridad y silencio','Frío en la frente','Vomité','Otro'], true, [])}
     </div>
     <div class="field-group">
       <label class="field-label">¿Cómo te sentís ahora? (intensidad del dolor)</label>
@@ -1306,7 +1344,7 @@ function closeCurrentWave(closeEpisode) {
   const resVals = getChipVals('modal_wave_res');
   wave.wave_end = document.getElementById('modal_wave_end')?.value || nowTimeStr();
   wave.resolved = true;
-  wave.resolution_type = resVals[0] || null;
+  wave.resolution_type = resVals.length ? resVals.join(', ') : null;
   wave.final_intensity = getSliderVal('modal_wave_now');
   if (closeEpisode) ep.status = 'resolved';
   DB.saveEpisode(ep);
@@ -1326,7 +1364,7 @@ function openNewWaveModal() {
     </div>
     <div class="field-group">
       <label class="field-label">Intensidad del dolor ahora</label>
-      ${renderSlider('modal_new_wave_int', 60, {leftLabel:'Leve', rightLabel:'Insoportable', scheme:'pain'})}
+      ${renderSlider('modal_new_wave_int', 6, {max:10, leftLabel:'Leve', rightLabel:'Insoportable', scheme:'pain'})}
     </div>
     <button class="btn btn-primary mt-3" onclick="addNewWave()">Registrar nueva ola</button>
   `;
@@ -1416,6 +1454,9 @@ function renderHome() {
         </div>
         ${wave.resolved ? `<button class="btn btn-ghost" style="width:100%;margin-top:6px;color:var(--text3)" onclick="openNewWaveModal()">🔄 El dolor volvió (nueva ola)</button>` : ''}
       </div>`;
+    html += `
+      <button class="btn btn-secondary btn-sm" style="width:100%;margin-bottom:16px;opacity:.75"
+        onclick="startWizard()">📅 Registrar episodio de otro día</button>`;
   } else {
     html += `
       <button class="episode-cta" onclick="startWizard()">
@@ -1462,7 +1503,7 @@ function renderEpisodeItem(ep) {
       <span class="ep-date">${formatDate(ep.date)}</span>
       <span class="ep-waves">${waveCount} ola${waveCount>1?'s':''} ${ep.status==='active'?'🟢':''}</span>
     </div>
-    <div class="intensity-bar"><div class="intensity-fill" style="width:${pct}%;background:${intensityColor(pct)}"></div></div>
+    <div class="intensity-bar"><div class="intensity-fill" style="width:${pct*10}%;background:${intensityColor(pct)}"></div></div>
     <div class="ep-tags" style="margin-top:8px">
       <span class="tag tag-red">${intensityLabel(pct)} (${pct})</span>
       ${phaseLabel ? `<span class="tag tag-pink">${phaseLabel.split(' ')[0]} ${phaseLabel.split(' ').slice(1,3).join(' ')}</span>` : ''}
@@ -1498,7 +1539,7 @@ function showEpisodeDetail(id) {
     </div>
     <h1 class="page-title">${formatDate(ep.date)}</h1>
     <div class="ep-tags" style="margin-bottom:16px">
-      <span class="tag tag-red">${intensityLabel(ep.current_intensity||0)} — ${ep.current_intensity||0}/100</span>
+      <span class="tag tag-red">${intensityLabel(ep.current_intensity||0)} — ${ep.current_intensity||0}/10</span>
       ${ep.status === 'active' ? '<span class="tag tag-green">Activo</span>' : ''}
     </div>`;
 
@@ -1513,7 +1554,7 @@ function showEpisodeDetail(id) {
           <div class="wave-content">
             <div class="wave-time">Ola ${w.id}: ${w.wave_start}${w.wave_end?' → '+w.wave_end:' (activa)'}</div>
             <div class="wave-intensity">Intensidad: ${w.peak_intensity} · ${w.resolution_type||''}</div>
-            ${(w.medications||[]).map(m=>`<span class="tag" style="margin-top:4px;display:inline-block">${m.name}${m.time?' '+m.time:''} · ${m.efficacy||0}% alivio</span>`).join('')}
+            ${(w.medications||[]).map(m=>`<span class="tag" style="margin-top:4px;display:inline-block">${m.name}${m.time?' '+m.time:''} · ${m.efficacy||0}/10 alivio</span>`).join('')}
           </div>
         </div>`).join('')}
     </div></div>`;
@@ -1524,12 +1565,13 @@ function showEpisodeDetail(id) {
     ['⚡ Tipo de dolor', (ep.pain_quality||[]).join(', ')],
     ['🌙 Fase menstrual', phase],
     ['📅 Días hasta menstruación', ep.days_until_period !== null && ep.days_until_period !== undefined ? `${ep.days_until_period} días` : null],
-    ['😴 Sueño', ep.sleep_hours ? `${ep.sleep_hours}h · calidad ${ep.sleep_quality||0}%` : null],
-    ['🌊 Estrés (ayer/hoy)', ep.stress_yesterday !== undefined ? `${ep.stress_yesterday}% / ${ep.stress_today}%` : null],
+    ['😴 Sueño', ep.sleep_hours ? `${ep.sleep_hours}h · calidad ${ep.sleep_quality||0}/10` : null],
+    ['🌊 Estrés (ayer/hoy)', ep.stress_yesterday !== undefined ? `${ep.stress_yesterday}/10 / ${ep.stress_today}/10` : null],
     ['🔄 Rebote de estrés', ep.stress_letdown ? 'Sí' : null],
-    ['💧 Hidratación', ep.hydration !== undefined ? `${ep.hydration}%` : null],
+    ['💧 Hidratación', ep.hydration !== undefined ? `${ep.hydration}/10` : null],
     ['🥗 Alimentos', (ep.foods_consumed||[]).join(', ')],
-    ['☕ Cafeína', ep.caffeine_cups !== undefined ? `${ep.caffeine_cups} tazas${ep.caffeine_withdrawal?' (abstinencia)':''}` : null],
+    ['☕ Café / té', ep.caffeine_cups !== undefined ? `${ep.caffeine_cups} tazas${ep.caffeine_withdrawal?' (abstinencia)':''}` : null],
+    ['🧉 Mate', ep.mate_rounds !== undefined ? (ep.mate_rounds === 0 ? 'No tomó' : `${ep.mate_rounds} ${ep.mate_rounds===1?'porrón':'porrones'}`) : null],
     ['☁️ Clima', ep.weather],
     ['📺 Pantalla', ep.screen_time !== undefined ? `${ep.screen_time}h` : null],
     ['⚠️ Pródromo', (ep.prodrome||[]).join(', ')],
@@ -1595,11 +1637,11 @@ function analyzePatterns(episodes) {
       });
     }
     const avgQuality = sleepEps.reduce((s,e)=>s+(e.sleep_quality||50),0)/sleepEps.length;
-    if (avgQuality < 55) {
+    if (avgQuality < 5.5) {
       insights.push({
         type:'sleep_quality', emoji:'🌙', priority:'medium',
         title: 'Calidad del sueño comprometida',
-        text: `La calidad promedio del sueño previo al episodio es <strong>${Math.round(avgQuality)}%</strong>. El sueño fragmentado (despertarse varias veces) es más predictivo que la duración.`,
+        text: `La calidad promedio del sueño previo al episodio es <strong>${(Math.round(avgQuality*10)/10)}/10</strong>. El sueño fragmentado (despertarse varias veces) es más predictivo que la duración.`,
         pct: Math.round(avgQuality)
       });
     }
@@ -1618,13 +1660,13 @@ function analyzePatterns(episodes) {
   }
 
   // 4. High stress before episode
-  const highStressEps = episodes.filter(e=>(e.stress_yesterday||0)>=65).length;
+  const highStressEps = episodes.filter(e=>(e.stress_yesterday||0)>=6.5).length;
   const highStressPct = Math.round(highStressEps/n*100);
   if (highStressPct >= 40) {
     insights.push({
       type:'stress', emoji:'🌊', priority:'medium',
       title: 'Estrés alto previo',
-      text: `El <strong>${highStressPct}%</strong> de los episodios siguieron a un día con estrés ≥65%. El estrés modula los niveles de CGRP, el péptido clave en la cascada de la migraña.`,
+      text: `El <strong>${highStressPct}%</strong> de los episodios siguieron a un día con estrés ≥6.5/10. El estrés modula los niveles de CGRP, el péptido clave en la cascada de la migraña.`,
       pct: highStressPct
     });
   }
@@ -1757,7 +1799,7 @@ function renderPatterns() {
       <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
         <div class="stat-box"><div class="stat-value" style="font-size:20px;color:${intensityColor(Number(avgPain))}">${avgPain}</div><div class="stat-label">dolor medio</div></div>
         <div class="stat-box"><div class="stat-value" style="font-size:20px">${avgSleep}h</div><div class="stat-label">sueño previo</div></div>
-        <div class="stat-box"><div class="stat-value" style="font-size:20px;color:var(--amber)">${avgStress}%</div><div class="stat-label">estrés previo</div></div>
+        <div class="stat-box"><div class="stat-value" style="font-size:20px;color:var(--amber)">${avgStress}/10</div><div class="stat-label">estrés previo</div></div>
       </div>
     </div>`;
   }
@@ -1789,21 +1831,10 @@ function renderSettings() {
       </div>
     </div>
     <div class="settings-section">
-      <div class="card-title">📱 Cómo usar en el celular</div>
+      <div class="card-title">📱 Como usar en el celular</div>
       <div class="card">
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:12px">
-          <strong style="color:var(--text)">Opción 1 – iPhone/iPad (Safari):</strong><br>
-          Abrí este archivo en Safari → tocá el botón Compartir → "Añadir a pantalla de inicio". Queda como una mini-app.
-        </p>
-        <p style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:12px">
-          <strong style="color:var(--text)">Opción 2 – Desde tu computadora por WiFi:</strong><br>
-          1. Abrí una terminal en la carpeta del proyecto<br>
-          2. Ejecutá: <code style="background:var(--card2);padding:2px 6px;border-radius:4px">python3 -m http.server 8080</code><br>
-          3. En tu celular (misma WiFi): ingresá a <code style="background:var(--card2);padding:2px 6px;border-radius:4px">http://[ip-de-tu-compu]:8080</code>
-        </p>
         <p style="font-size:13px;color:var(--text2);line-height:1.7">
-          <strong style="color:var(--text)">Opción 3 – GitHub Pages (recomendada para uso continuo):</strong><br>
-          Subí el archivo a un repositorio privado de GitHub y habilitá Pages. Tenés la app online, gratis, accesible desde cualquier dispositivo. Escribime si querés ayuda con esto.
+          Si desinstalas la app, se perdera el historial de tus episodios, exporta los datos para luego poder importarlos nuevamente<br><br>
         </p>
       </div>
     </div>
@@ -1813,6 +1844,9 @@ function renderSettings() {
         <p style="font-size:13px;color:var(--text2);line-height:1.7">
           MigraTrack v1.0 · Basado en evidencia clínica reciente (2020–2025).<br>
           Fuentes: IHS, AHS, PMC studies sobre CGRP, ciclo menstrual y migraña, sueño y migraña, ML predictivo.<br><br>
+          Desarrollado por <strong style="color:var(--text)">Maria Ines Alderete</strong><br>
+          <a href="https://github.com/marualderete/migraine-tracker" target="_blank"
+            style="color:var(--accent2);text-decoration:none">github.com/marualderete/migraine-tracker</a><br><br>
           <em>No reemplaza la consulta médica.</em>
         </p>
       </div>

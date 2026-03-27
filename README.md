@@ -1,6 +1,6 @@
 # Migraine Tracker 🧠💥
 
-A tiny app to track my girlfriend's migraines… because her brain clearly isn't helping.
+A super tiny app to track my girlfriend's migraines… 
 
 ## What is this?
 
