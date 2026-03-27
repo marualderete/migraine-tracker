@@ -1,4 +1,4 @@
-const CACHE = 'migratrack-v1';
+const CACHE = 'migratrack-v2';
 const ASSETS = [
   './',
   './index.html',

@@ -143,13 +143,13 @@
     .wizard-step-indicator { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; }
     .wizard-step-text { font-size: 12px; color: var(--text2); }
     .wizard-step-emoji { font-size: 18px; }
-    .wizard-body { padding: 20px 16px; }
-    .wizard-step-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-    .wizard-step-subtitle { font-size: 13px; color: var(--text2); margin-bottom: 24px; line-height: 1.5; }
+    .wizard-body { padding: 28px 20px 12px; }
+    .wizard-step-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .wizard-step-subtitle { font-size: 14px; color: var(--text2); margin-bottom: 32px; line-height: 1.75; }
     /* ── FORM COMPONENTS ── */
-    .field-group { margin-bottom: 24px; }
-    .field-label { font-size: 15px; font-weight: 600; margin-bottom: 6px; display: block; }
-    .field-sublabel { font-size: 12px; color: var(--text2); margin-bottom: 10px; line-height: 1.5; }
+    .field-group { margin-bottom: 40px; }
+    .field-label { font-size: 16px; font-weight: 600; margin-bottom: 10px; display: block; }
+    .field-sublabel { font-size: 13px; color: var(--text2); margin-bottom: 14px; line-height: 1.7; }
     /* Slider */
     .slider-wrap { position: relative; }
     .slider-value-badge {
@@ -173,9 +173,9 @@
     .slider-end-labels { display: flex; justify-content: space-between; margin-top: 6px; }
     .slider-end-labels span { font-size: 11px; color: var(--text3); }
     /* Chips */
-    .chips-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips-grid { display: flex; flex-wrap: wrap; gap: 10px; }
     .chip {
-      padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
+      padding: 11px 18px; border-radius: 24px; font-size: 14px; font-weight: 500;
       background: var(--card2); border: 1.5px solid var(--border); color: var(--text2);
       cursor: pointer; transition: all .15s; user-select: none; -webkit-tap-highlight-color: transparent;
     }
@@ -183,23 +183,23 @@
     .chip.selected-pink { background: rgba(236,72,153,.2); border-color: var(--pink); color: var(--pink2); }
     .chip:active { transform: scale(0.95); }
     /* Toggle */
-    .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; }
-    .toggle-text { font-size: 15px; font-weight: 500; }
-    .toggle-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+    .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
+    .toggle-text { font-size: 16px; font-weight: 500; }
+    .toggle-sub { font-size: 13px; color: var(--text2); margin-top: 3px; }
     .toggle {
-      position: relative; width: 50px; height: 28px; cursor: pointer; flex-shrink: 0;
+      position: relative; width: 56px; height: 32px; cursor: pointer; flex-shrink: 0;
     }
     .toggle input { opacity: 0; width: 0; height: 0; }
     .toggle-slider {
       position: absolute; inset: 0; background: var(--card2); border: 1.5px solid var(--border);
-      border-radius: 14px; transition: all .2s;
+      border-radius: 16px; transition: all .2s;
     }
     .toggle-slider::after {
-      content: ''; position: absolute; width: 22px; height: 22px;
-      left: 2px; top: 1px; background: var(--text3); border-radius: 50%; transition: all .2s;
+      content: ''; position: absolute; width: 24px; height: 24px;
+      left: 3px; top: 3px; background: var(--text3); border-radius: 50%; transition: all .2s;
     }
     .toggle input:checked + .toggle-slider { background: var(--accent); border-color: var(--accent); }
-    .toggle input:checked + .toggle-slider::after { transform: translateX(22px); background: #fff; }
+    .toggle input:checked + .toggle-slider::after { transform: translateX(24px); background: #fff; }
     /* Time input */
     .time-input {
       background: var(--card2); border: 1.5px solid var(--border); border-radius: var(--radius-sm);
@@ -223,12 +223,12 @@
     .textarea:focus { border-color: var(--accent); }
     /* Wizard nav buttons */
     .wizard-nav {
-      display: flex; gap: 10px; padding: 16px;
+      display: flex; gap: 10px; padding: 16px 20px;
       position: sticky; bottom: 64px; background: var(--bg);
       border-top: 1px solid var(--border);
     }
-    .wizard-nav .btn-back { flex: 0 0 auto; width: 52px; height: 50px; padding: 0; }
-    .wizard-nav .btn-next { flex: 1; height: 50px; font-size: 16px; }
+    .wizard-nav .btn-back { flex: 0 0 auto; width: 56px; height: 58px; padding: 0; font-size: 20px; }
+    .wizard-nav .btn-next { flex: 1; height: 58px; font-size: 17px; letter-spacing: .3px; }
     /* ── PATTERNS ── */
     .insight-card {
       border-radius: var(--radius); padding: 16px; margin-bottom: 10px;
@@ -291,6 +291,20 @@
     .settings-row:last-child { border-bottom: none; }
     .settings-row-label { font-size: 15px; }
     .settings-row-icon { font-size: 18px; }
+    /* ── DATE PICKER ── */
+    .date-picker-opts { display: flex; flex-direction: column; gap: 10px; position: relative; }
+    .date-opt-btn {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 20px; border-radius: var(--radius); border: 1.5px solid var(--border);
+      background: var(--card2); color: var(--text); cursor: pointer; width: 100%;
+      transition: all .15s; text-align: left; -webkit-tap-highlight-color: transparent;
+    }
+    .date-opt-btn:active { transform: scale(0.98); opacity: .85; }
+    .date-opt-btn.selected { border-color: var(--accent); background: rgba(139,92,246,.15); }
+    .date-opt-btn.selected .date-opt-label { color: var(--accent2); }
+    .date-opt-label { font-size: 16px; font-weight: 600; }
+    .date-opt-sub { font-size: 13px; color: var(--text2); }
+    .date-opt-btn.selected .date-opt-sub { color: var(--accent2); opacity: .8; }
     /* ── MISC ── */
     .mt-2 { margin-top: 8px; }
     .mt-3 { margin-top: 12px; }
@@ -351,6 +365,7 @@
 // ============================================================
 const todayStr = () => new Date().toISOString().slice(0,10);
 const nowTimeStr = () => new Date().toTimeString().slice(0,5);
+const dateOffset = (days) => { const d = new Date(); d.setDate(d.getDate() + days); return d.toISOString().slice(0,10); };
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
 const clamp = (v,min,max) => Math.min(max,Math.max(min,v));
 
@@ -439,6 +454,46 @@ const DB = {
 };
 
 // ============================================================
+// DATE PICKER
+// ============================================================
+function renderDatePicker(selected) {
+  const today = todayStr();
+  const opts = [
+    { label: 'Hoy',         sub: formatDate(today),          value: today },
+    { label: 'Ayer',        sub: formatDate(dateOffset(-1)), value: dateOffset(-1) },
+    { label: 'Hace 2 días', sub: formatDate(dateOffset(-2)), value: dateOffset(-2) },
+  ];
+  const isCustom = selected && !opts.find(o => o.value === selected);
+  return `
+    <div id="date-picker-container" style="position:relative">
+      <div class="date-picker-opts">
+        ${opts.map(o => `
+          <button type="button" class="date-opt-btn ${selected === o.value ? 'selected' : ''}"
+            onclick="selectEpisodeDate('${o.value}')">
+            <span class="date-opt-label">${o.label}</span>
+            <span class="date-opt-sub">${o.sub}</span>
+          </button>`).join('')}
+        <button type="button" class="date-opt-btn ${isCustom ? 'selected' : ''}"
+          onclick="document.getElementById('f_episode_date_native').showPicker?.() || document.getElementById('f_episode_date_native').click()">
+          <span class="date-opt-label">Otra fecha…</span>
+          <span class="date-opt-sub">${isCustom ? formatDate(selected) : 'Elegir del calendario'}</span>
+        </button>
+      </div>
+      <input type="date" id="f_episode_date_native"
+        style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;top:0;left:0"
+        value="${selected || today}" max="${today}"
+        onchange="selectEpisodeDate(this.value)">
+      <input type="hidden" id="f_episode_date" value="${selected || today}">
+    </div>`;
+}
+
+function selectEpisodeDate(date) {
+  wizardData.episode_date = date;
+  const container = document.getElementById('date-picker-container');
+  if (container) container.outerHTML = renderDatePicker(date);
+}
+
+// ============================================================
 // WIZARD STATE
 // ============================================================
 let wizardData = {};
@@ -465,6 +520,11 @@ const WIZARD_STEPS = [
     render() {
       return `
         <div class="field-group">
+          <label class="field-label">¿Qué día fue el episodio?</label>
+          <p class="field-sublabel">Tocá el día que corresponda. Podés registrar episodios pasados.</p>
+          ${renderDatePicker(wizardData.episode_date || todayStr())}
+        </div>
+        <div class="field-group">
           <label class="field-label">¿A qué hora comenzó el dolor?</label>
           <input type="time" id="f_started_at" class="time-input" value="${wizardData.started_at || nowTimeStr()}">
         </div>
@@ -485,6 +545,7 @@ const WIZARD_STEPS = [
       `;
     },
     collect() {
+      wizardData.episode_date = document.getElementById('f_episode_date').value;
       wizardData.started_at = document.getElementById('f_started_at').value;
       wizardData.current_intensity = getSliderVal('current_intensity');
       wizardData.disability_level = getSliderVal('disability_level');
@@ -1141,11 +1202,13 @@ function removeMedFromWizard(idx) {
 }
 
 function saveWizardEpisode() {
+  const epDate = wizardData.episode_date || todayStr();
+  const isPastEpisode = epDate < todayStr();
   const ep = {
     id: uid(),
-    date: todayStr(),
+    date: epDate,
     created_at: new Date().toISOString(),
-    status: 'active',
+    status: isPastEpisode ? 'resolved' : 'active',
     ...wizardData,
     waves: [{
       id: 1,
