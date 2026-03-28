@@ -1,8 +1,16 @@
 # Migraine Tracker 🧠💥
 
+🌐 **English** | [Español](README.es.md)
+
 **Built in a day. Because migraines don’t wait.**
 
 👉 https://marualderete.github.io/migraine-tracker/
+
+## How to install as an app
+- open https://marualderete.github.io/migraine-tracker/ in your browser
+- Chrome usually open a "Install app" banner (say yes and it will install it).
+- If the banner does not appear, right click -> Add to initial page -> Install
+That's it!
 
 ---
 
