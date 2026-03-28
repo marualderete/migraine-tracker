@@ -1,69 +1,89 @@
 # Migraine Tracker 🧠💥
 
-A super tiny app to track my girlfriend's migraines… 
+**Built in a day. Because migraines don’t wait.**
+
+👉 https://marualderete.github.io/migraine-tracker/
+
+---
 
 ## What is this?
 
-This is a **super simple migraine tracker**.
+A stupidly simple migraine tracker.
 
-You log when your head decides to betray you, and over time you can:
-- Track frequency
-- Track intensity
-- Maybe (just maybe) understand your triggers
-- Feel slightly more in control of your life
+No accounts.
+No setup.
+No overthinking.
 
-Or at least pretend you are.
+Just open it and log it.
 
-## Why does this exist?
+---
 
-Because migraines are chaotic, annoying, and have zero respect for your schedule. 
-Keeping a track of the episodes is very important for your doctors and for you, to understand if there's a pattern somehow, that triggers it
+## Why I made this
 
-And also because:
-> I had 30 minutes and questionable motivation to do my REAL job. Literally 30 mins of my life are here.
+Most apps felt like this:
 
-## Features
+* too slow
+* too complicated
+* too much thinking
 
-- Log migraines
-- See basic history
-- Minimal UI (partly by design, partly by lack of time)
-- No unnecessary complexity
-- No AI buzzwords
-- No "revolutionary insights"
-- Just vibes and pain tracking
+And when you have a migraine… thinking is the problem.
 
-## Tech stack
+So I built something that requires almost none.
 
-Honestly?
-Whatever worked in those 30 minutes.
+---
 
-(If you're here to judge architecture… please don’t.)
+## What it does
+
+* Track migraine intensity
+* Log symptoms in seconds
+* Stay out of your way
+
+That’s it.
+
+---
+
+## What it doesn’t do
+
+* No sync
+* No cloud
+* No AI
+* No “premium”
+
+And that’s intentional.
+
+---
+
+## Philosophy
+
+This is not a startup.
+This is not a product.
+
+It’s just a small tool that solves one problem well.
+
+Built fast. Kept simple.
+
+---
+
+## Support this project
+
+If this made a bad day a little easier:
+
+* ⭐ Star the repo
+* 🐛 Open an issue
+* 💬 Share it with someone who needs it
+* ☕ Buy me a coffee
+
+👉 https://www.buymeacoffee.com/malderete
+
+---
 
 ## Disclaimer
 
-- This is not a medical tool
-- This is not scientifically validated
-- This is barely validated by me
+Not medical advice.
+Just a simple tracker.
 
-But it works. Kind of.
+---
 
-## Roadmap
+## License
 
-- [ ] Maybe improve UI
-- [ ] Maybe add features
-- [ ] Maybe not
-- [ ] Depends on mood, caffeine, and migraines
-
-## Contributing
-
-If you want to improve this:
-1. You're already more committed than I was
-2. PRs are welcome
-3. Expectations are low (intentionally)
-
-## Final note
-
-If this helps you even a little → amazing  
-If it doesn't → same
-
-We shipped anyway 🚀
+MIT

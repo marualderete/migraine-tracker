@@ -1,0 +1,33 @@
+/* ── VIEWS ── */
+.view { display: none; padding: 16px 16px 0; animation: fadeIn .2s ease; }
+.view.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+/* ── HEADINGS ── */
+.page-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.page-subtitle { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
+/* ── WIZARD ── */
+#view-wizard { padding: 0; }
+.wizard-top {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg); padding: 16px 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.wizard-progress-bar { height: 3px; background: var(--card2); border-radius: 2px; margin-bottom: 12px; }
+.wizard-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--pink)); border-radius: 2px; transition: width .4s ease; }
+.wizard-step-indicator { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; }
+.wizard-step-text { font-size: 12px; color: var(--text2); }
+.wizard-step-emoji { font-size: 18px; }
+.wizard-body { padding: 28px 20px 120px; }
+.wizard-step-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+.wizard-step-subtitle { font-size: 14px; color: var(--text2); margin-bottom: 32px; line-height: 1.75; }
+/* Wizard nav buttons */
+.wizard-nav {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 12px 20px max(12px, env(safe-area-inset-bottom));
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+  background: var(--bg); border-top: 1px solid var(--border);
+}
+.wizard-nav-row { display: flex; gap: 10px; width: 100%; }
+.wizard-nav .btn-back { flex: 0 0 auto; width: 56px; height: 58px; padding: 0; font-size: 20px; }
+.wizard-nav .btn-next { flex: 1; height: 58px; font-size: 17px; letter-spacing: .3px; }
+.btn-save-now { width: 100%; height: 46px; color: var(--amber); border-color: rgba(245,158,11,.4); font-size: 15px; }

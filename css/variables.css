@@ -1,0 +1,38 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0d0820; --bg2: #130c2a; --card: #1a1240; --card2: #221850;
+  --border: #2d2060; --accent: #8b5cf6; --accent2: #a78bfa;
+  --pink: #ec4899; --pink2: #f472b6; --green: #10b981; --green2: #34d399;
+  --amber: #f59e0b; --red: #ef4444; --red2: #fca5a5;
+  --text: #e2e8f0; --text2: #94a3b8; --text3: #4a5568;
+  --radius: 14px; --radius-sm: 8px;
+}
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg); color: var(--text);
+  display: flex; flex-direction: column;
+}
+#app {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding-bottom: 80px;
+  -webkit-overflow-scrolling: touch;
+}
+/* ── NAV ── */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(13,8,32,0.95);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-around; align-items: center;
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+  height: 64px;
+}
+.nav-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  gap: 3px; cursor: pointer; padding: 4px 0; opacity: 0.45;
+  transition: opacity .2s; border: none; background: none; color: var(--text);
+  font-size: 11px; font-weight: 500;
+}
+.nav-item.active { opacity: 1; color: var(--accent2); }
+.nav-item .nav-icon { font-size: 20px; line-height: 1; }
