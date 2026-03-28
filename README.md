@@ -72,8 +72,10 @@ If this made a bad day a little easier:
 * 🐛 Open an issue
 * 💬 Share it with someone who needs it
 * ☕ Buy me a coffee
+* Or just send me an email and say Hi! :D 
 
 👉 https://www.buymeacoffee.com/malderete
+👉 maru.ferri@gmail.com
 
 ---
 
